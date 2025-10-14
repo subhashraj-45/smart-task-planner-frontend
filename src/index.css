@@ -1,0 +1,6 @@
+/* Remove all @tailwind directives */
+/* The MUI CssBaseline component handles all resets */
+body {
+  margin: 0;
+  padding: 0;
+}
