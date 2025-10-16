@@ -1,4 +1,4 @@
-// src/components/TaskCard.jsx (CONFIRM THIS STYLE - Matches Image 2)
+// src/components/TaskCard.jsx (REVERTED FOR WHITE BACKGROUND)
 import React from "react";
 import { Card, CardContent, Typography, Box, Chip, Stack } from "@mui/material";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
@@ -6,7 +6,14 @@ import LinkIcon from "@mui/icons-material/Link";
 
 export default function TaskCard({ task, index }) {
   return (
-    <Card variant="outlined" sx={{ borderRadius: 2, bgcolor: "grey.50" }}>
+    <Card 
+        variant="outlined" 
+        sx={{ 
+            borderRadius: 2, 
+            // 🛑 REVERT: Use light gray background
+            bgcolor: "grey.50" 
+        }}
+    >
       <CardContent sx={{ p: 2, "&:last-child": { pb: 2 } }}>
         <Typography variant="subtitle1" fontWeight="600" color="text.primary" mb={1}>
           {index + 1}. {task.task}
