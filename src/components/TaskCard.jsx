@@ -1,45 +1,55 @@
-// src/components/TaskCard.jsx (Ensure this is the current code)
-import React from 'react';
-import { Paper, Box, Typography } from '@mui/material';
-// ... imports
+// src/components/TaskCard.jsx (Pre-Styling/Default UI)
+import React from "react";
+import { Card, CardContent, Typography, Box, Chip, Stack } from "@mui/material";
+import AccessTimeIcon from "@mui/icons-material/AccessTime";
+import LinkIcon from "@mui/icons-material/Link";
 
 export default function TaskCard({ task, index }) {
-  // 🛑 CRITICAL FIX 1: Define a variable to capture the task title, checking both possible keys
-  const taskTitle = task.title || task.task; 
-  
-  // Define dependencies variable for robustness (from yesterday's fix)
-  const taskDependencies = task.dependsOn || task.depends_on; 
-
-  const accentColor = 'primary.light'; 
-
   return (
-    <Paper
-      // ... (sx styles remain the same) ...
+    <Card 
+        variant="outlined" 
+        sx={{ 
+            borderRadius: 2, 
+            // Light grey background
+            bgcolor: "grey.50" 
+        }}
     >
-      <Typography variant="subtitle1" fontWeight="bold" sx={{ color: 'text.primary', mb: 1 }}>
-        {index + 1}. {**taskTitle**} // 🛑 CRITICAL FIX 2: Use the robust variable here
-      </Typography>
+      <CardContent sx={{ p: 2, "&:last-child": { pb: 2 } }}>
+        <Typography variant="subtitle1" fontWeight="600" color="text.primary" mb={1}>
+          {index + 1}. {task.task || task.title} // Added robust check just in case
+        </Typography>
 
-      {task.deadline && (
-        <Box display="flex" alignItems="center" sx={{ color: 'grey.600', fontSize: '0.85rem', mb: 0.5 }}>
-          <AccessTimeIcon sx={{ fontSize: '1rem', mr: 0.5, color: 'text.secondary' }} />
-          Deadline: {task.deadline}
-        </Box>
-      )}
-
-      {taskDependencies && taskDependencies.length > 0 && (
-        <Box sx={{ mt: 1 }}>
-          <Typography variant="caption" display="block" sx={{ color: 'text.secondary', mb: 0.5 }}>
-            <LinkIcon sx={{ fontSize: '0.85rem', mr: 0.5 }} />
-            Depends on:
+        <Box display="flex" alignItems="center" color="text.secondary" mb={task.depends_on?.length > 0 ? 1 : 0}>
+          <AccessTimeIcon sx={{ fontSize: 16, mr: 0.5 }} />
+          <Typography variant="body2" component="span" fontWeight="500">
+            Deadline:
           </Typography>
-          <Box display="flex" flexWrap="wrap" gap={0.5}>
-            {taskDependencies.map((dep, depIndex) => (
-              // ... (dependency chip styling) ...
-            ))}
-          </Box>
+          <Typography variant="body2" ml={0.5}>
+            {task.deadline}
+          </Typography>
         </Box>
-      )}
-    </Paper>
+
+        {task.depends_on?.length > 0 && (
+          <Box mt={1}>
+            <Stack direction="row" spacing={1} alignItems="center">
+              <LinkIcon sx={{ fontSize: 16, color: "grey.500" }} />
+              <Typography variant="body2" component="span" fontWeight="500" color="text.secondary">
+                Depends on:
+              </Typography>
+              {task.depends_on.map((dep, i) => (
+                <Chip
+                  key={i}
+                  label={dep}
+                  size="small"
+                  color="info"
+                  variant="outlined"
+                  sx={{ borderRadius: 1.5 }}
+                />
+              ))}
+            </Stack>
+          </Box>
+        )}
+      </CardContent>
+    </Card>
   );
 }
