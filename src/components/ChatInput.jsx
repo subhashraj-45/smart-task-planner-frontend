@@ -1,4 +1,4 @@
-// src/components/ChatInput.jsx (ADAPTED FOR IMAGE 2 STYLE)
+// src/components/ChatInput.jsx (FINAL VISIBILITY FIX W/ DARK BACKGROUND)
 import React, { useState } from "react";
 import { Box, TextField, Button, CircularProgress } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
@@ -21,10 +21,11 @@ export default function ChatInput({ onGenerate, loading }) {
         display: "flex",
         alignItems: "flex-end",
         gap: 2,
-        // 🛑 REMOVE: No dark background for the input bar itself
-        // 🛑 REMOVE: No top border, as the Home.jsx wrapper provides it
-        // p: 2, // Padding now handled by the wrapper Box in Home.jsx
-        // bgcolor: "#2F4F4F", // This background is removed
+        // 🛑 RESTORE: Dark background and border for floating effect contrast
+        borderTop: 1,
+        borderColor: "text.primary", 
+        p: 2,
+        bgcolor: "#2F4F4F", // Deep Teal (Dark Background)
       }}
     >
       <TextField
@@ -38,8 +39,9 @@ export default function ChatInput({ onGenerate, loading }) {
         sx={{
           "& .MuiOutlinedInput-root": {
             borderRadius: 3,
+            // FIX: Keep white background so text is visible on dark bar
             bgcolor: 'white', 
-            color: 'text.primary', // Ensure dark text on white background
+            color: 'text.primary',
           },
         }}
       />
