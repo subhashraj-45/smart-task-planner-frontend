@@ -1,4 +1,4 @@
-// src/pages/Home.jsx (REVERTED TO ORIGINAL CHAT LAYOUT - FINAL FUNCTIONAL)
+// src/pages/Home.jsx (FINAL CHAT LAYOUT WITH WHITE BACKGROUND)
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Box, Paper, Typography, Container } from "@mui/material";
@@ -63,13 +63,13 @@ export default function Home() {
         sx={{
           borderRadius: 4,
           overflow: "hidden",
-          position: 'relative', // Necessary for floating input bar
+          position: 'relative', 
           border: 1,
           borderColor: "text.primary", 
           display: "flex",
           flexDirection: "column",
           maxHeight: 'calc(100vh - 120px)',
-          // 🛑 REVERT: Main container background to white
+          // Main container background set to white
           bgcolor: 'background.paper', 
           color: 'text.primary', 
         }}
@@ -80,9 +80,8 @@ export default function Home() {
             flexGrow: 1,
             overflowY: "auto",
             height: '100%',
-            // 🛑 REVERT: Chat area background to white
+            // Chat area background set to white
             bgcolor: 'background.paper', 
-            // Padding for floating input
             paddingBottom: '100px', 
           }}
         >
