@@ -1,6 +1,16 @@
+/* src/index.css (FINAL BACKGROUND GRADIENT) */
 /* Remove all @tailwind directives */
 /* The MUI CssBaseline component handles all resets */
 body {
   margin: 0;
   padding: 0;
+  
+  /* 🛑 CRITICAL CHANGE: Apply full-page gradient background */
+  background: linear-gradient(135deg, #1A323A 0%, #2F4F4F 50%, #5C3D4D 100%);
+  min-height: 100vh; /* Ensures the gradient covers the entire screen height */
+}
+
+/* Ensure #root and all app containers are transparent if needed to see the gradient */
+#root {
+  min-height: 100vh;
 }
