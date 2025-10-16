@@ -12,7 +12,7 @@ function App() {
       sx={{
         minHeight: '100vh',
         // 🛑 CRITICAL CHANGE: Set the background to plain White
-        background: '2F3E46', // Or 'white' or 'background.default' if using MUI theme
+        background: '#2F3E46', // Or 'white' or 'background.default' if using MUI theme
         padding: 0, 
       }}
     >
