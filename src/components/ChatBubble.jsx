@@ -1,10 +1,10 @@
-// src/components/ChatBubble.jsx (RESTORED GOLD/WHITE BUBBLE STYLING)
+// src/components/ChatBubble.jsx (Basic UI)
 import React from "react";
 import { motion } from "framer-motion";
-import { Paper, Box, Typography, Button } from "@mui/material"; 
-import ContentCopyIcon from '@mui/icons-material/ContentCopy'; 
-import toast from "react-hot-toast"; 
-import { formatPlanForCopy } from "../utils/planUtils"; 
+import { Paper, Box, Typography, Button } from "@mui/material"; 
+import ContentCopyIcon from '@mui/icons-material/ContentCopy'; 
+import toast from "react-hot-toast"; 
+import { formatPlanForCopy } from "../utils/planUtils"; 
 
 export default function ChatBubble({ sender, text, goal, tasks, children }) {
   const isUser = sender === "user";
@@ -25,31 +25,22 @@ export default function ChatBubble({ sender, text, goal, tasks, children }) {
           borderRadius: 3,
           ...(isUser
             ? {
-                // 🛑 RESTORE USER: Gold background, white text, aligns right
+                // USER: Default primary color, white text
                 bgcolor: "primary.main",
                 color: "white",
                 borderBottomRightRadius: 0,
               }
             : {
-                // AI: White background, dark text, aligns left
-                bgcolor: "white", 
-                color: "text.primary", 
+                // AI: Default white background, dark text
+                bgcolor: "background.paper", 
+                color: "text.primary", 
                 border: 1,
                 borderColor: "grey.200",
                 borderBottomLeftRadius: 0,
               }),
         }}
       >
-        {/* ... text and children display logic remains the same ... */}
-        {text && (
-          <Typography variant="body2" sx={{ whiteSpace: 'pre-line', lineHeight: 1.5 }}>
-            {text}
-          </Typography>
-        )}
-        
-        {children}
-
-        {/* COPY BUTTON LOGIC (remains the same) */}
+        {/* ... content remains the same ... */}
       </Paper>
     </motion.div>
   );
