@@ -1,4 +1,4 @@
-// src/components/ChatBubble.jsx (FINAL STYLING REVERSION)
+// src/components/ChatBubble.jsx (FINAL WHITE/GOLD BUBBLE STYLING)
 import React from "react";
 import { motion } from "framer-motion";
 import { Paper, Box, Typography, Button } from "@mui/material"; 
@@ -6,11 +6,12 @@ import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import toast from "react-hot-toast"; 
 import { formatPlanForCopy } from "../utils/planUtils"; 
 
-// Accepts goal and tasks props
 export default function ChatBubble({ sender, text, goal, tasks, children }) {
   const isUser = sender === "user";
 
-  const handleCopy = () => { /* ... remains the same ... */ };
+  const handleCopy = () => {
+    // ... (copy logic remains the same)
+  };
 
   return (
     <motion.div
@@ -26,15 +27,15 @@ export default function ChatBubble({ sender, text, goal, tasks, children }) {
           borderRadius: 3,
           ...(isUser
             ? {
-                // User Bubble: Gold background, white text
+                // 🛑 USER: Gold background, white text, aligns right
                 bgcolor: "primary.main",
                 color: "white",
                 borderBottomRightRadius: 0,
               }
             : {
-                // 🛑 REVERT: AI Bubble to white background, dark text
+                // 🛑 AI: White background, dark text, aligns left
                 bgcolor: "white", 
-                color: "text.primary", // Dark text
+                color: "text.primary", 
                 border: 1,
                 borderColor: "grey.200",
                 borderBottomLeftRadius: 0,
