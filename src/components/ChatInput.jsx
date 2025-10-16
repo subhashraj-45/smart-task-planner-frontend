@@ -1,4 +1,4 @@
-// src/components/ChatInput.jsx (FINAL GOLD INPUT TEXT)
+// src/components/ChatInput.jsx (FINAL WHITE INPUT BAR BACKGROUND)
 import React, { useState } from "react";
 import { Box, TextField, Button, CircularProgress } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
@@ -21,11 +21,10 @@ export default function ChatInput({ onGenerate, loading }) {
         display: "flex",
         alignItems: "flex-end",
         gap: 2,
-        // Outer container remains Dark Teal
-        borderTop: 1,
-        borderColor: "text.primary", 
+        // 🛑 CHANGE: Remove dark background and border
+        borderTop: 'none', 
         p: 2,
-        bgcolor: "#2F4F4F", // Deep Teal (Dark Background)
+        bgcolor: 'white', // Set the outer input bar background to WHITE
       }}
     >
       <TextField
@@ -39,15 +38,15 @@ export default function ChatInput({ onGenerate, loading }) {
         sx={{
           "& .MuiOutlinedInput-root": {
             borderRadius: 3,
-            // Input box background is WHITE
+            // Input box itself is WHITE
             bgcolor: 'white', 
-            // 🛑 CHANGE: Set the actual text color to Gold
-            color: 'primary.main', // Assuming 'primary.main' is your Gold color
-            fontWeight: 'bold' // Added bold for better visibility
+            // Text is GOLD
+            color: 'primary.main', 
+            fontWeight: 'bold' 
           },
-          // Change placeholder color
+          // Placeholder color remains
           "& .MuiInputBase-input::placeholder": {
-            color: 'text.secondary', // Placeholder remains a neutral dark color
+            color: 'text.secondary', 
             opacity: 1,
           },
         }}
