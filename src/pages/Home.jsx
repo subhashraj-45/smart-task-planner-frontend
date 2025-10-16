@@ -1,4 +1,4 @@
-// src/pages/Home.jsx (FINAL VERSION FOR WHITE INTERACTIVE AREA)
+// src/pages/Home.jsx (CORRECTED FINAL VERSION)
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Box, Paper, Typography, Container } from "@mui/material";
@@ -12,7 +12,43 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
   const [chat, setChat] = useState([]);
 
-  // The functional handleGenerate is assumed to be correct
+  const handleGenerate = async (goal) => {
+    setLoading(true);
+    setChat((prev) => [...prev, { sender: "user", text: goal, goal }]);
+
+    try {
+      const data = await generatePlan(goal);
+      const tasks = (data && data.plan) || (data && data.tasks) || [];
+
+      if (tasks.length === 0) {
+        toast.error("Plan generated, but no tasks found.");
+        setChat((prev) => [
+            ...prev,
+            { 
+              sender: "ai", 
+              text: "I received your request, but I couldn't generate a task list.", 
+              tasks: [],
+            },
+        ]);
+      } else {
+        setChat((prev) => [
+          ...prev,
+          {
+            sender: "ai",
+            text: `Here’s your task plan for "${goal}" 👇`,
+            tasks,
+            goal: goal,
+          },
+        ]);
+        toast.success("Plan generated successfully!");
+      }
+    } catch (err) {
+      toast.error("Failed to connect to the server or generate plan.");
+      console.error("API Generation Error:", err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <Container maxWidth="md" sx={{ py: 4 }}>
@@ -28,7 +64,7 @@ export default function Home() {
           flexDirection: "column",
           maxHeight: 'calc(100vh - 120px)',
           
-          // Outer Paper (Chat Window Frame) remains DARK TEAL/GREEN
+          // Outer Paper (Chat Window Frame) is DARK TEAL/GREEN
           bgcolor: '#2F4F4F', 
           color: 'text.primary', 
         }}
@@ -40,8 +76,8 @@ export default function Home() {
             overflowY: "auto",
             height: '100%',
             
-            // 🛑 CHANGE 1: Inner Chat History Area set to WHITE
-            bgcolor: 'background.paper', // White
+            // Chat History Area is WHITE
+            bgcolor: 'background.paper', 
             paddingBottom: 3, 
           }}
         >
@@ -68,10 +104,21 @@ export default function Home() {
               </Paper>
             </motion.div>
           )}
-          {/* Chat bubbles will appear here */}
+          {chat.map((msg, i) => (
+            <Box key={i}>
+              <ChatBubble 
+                  sender={msg.sender} 
+                  text={msg.text}
+                  tasks={msg.tasks}
+                  goal={msg.goal}
+              >
+                {msg.tasks && <TaskList tasks={msg.tasks} />}
+              </ChatBubble>
+            </Box>
+          ))}
         </Box>
 
-        {/* 🛑 CHANGE 2: Input bar wrapper area set to WHITE */}
+        {/* Input bar wrapper area is WHITE */}
         <Box sx={{ p: 2, bgcolor: 'background.paper', borderTop: 1, borderColor: 'grey.300' }}>
           <ChatInput onGenerate={handleGenerate} loading={loading} />
         </Box>
