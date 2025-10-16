@@ -1,19 +1,21 @@
-// src/App.jsx (FINAL VERSION WITH WHITE BACKGROUND)
+
+// src/App.jsx
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { Box } from "@mui/material"; 
+import { Box } from "@mui/material"; // <-- 🛑 New Import: Box
 import Home from "./pages/Home";
 import History from "./pages/History";
 import Header from "./components/Header";
 
 function App() {
   return (
+    // 🛑 CRITICAL CHANGE: Wrap the whole app in Box for the background gradient
     <Box
       sx={{
         minHeight: '100vh',
-        // 🛑 CRITICAL CHANGE: Set the background to plain White
-        background: '#A8E6CF', // Or 'white' or 'background.default' if using MUI theme
-        padding: 0, 
+        // Apply the dark background texture from your icon
+        background: 'linear-gradient(135deg, #1A323A 0%, #2F4F4F 50%, #5C3D4D 100%)',
+        padding: 0, // Reset default padding
       }}
     >
       <Router>
