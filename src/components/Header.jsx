@@ -1,31 +1,48 @@
-// src/components/Header.jsx (MUI Version)
+// src/components/Header.jsx (FINAL MUI THEMED VERSION)
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import { AppBar, Toolbar, Typography, Button, Box } from "@mui/material";
-import BrainIcon from "@mui/icons-material/PsychologyOutlined";
+// You will no longer need the MUI BrainIcon import, we'll use an HTML <img> tag
+
+// You can use a dedicated component for the icon, or for simplicity, 
+// just use an <img> tag pointing to the public folder asset.
 
 export default function Header() {
   const { pathname } = useLocation();
 
   return (
-    <AppBar position="sticky" color="default" elevation={1} sx={{ bgcolor: 'white' }}>
+    // 🛑 CHANGE 1: Apply Teal/Salmon background color from your custom theme
+    <AppBar position="sticky" sx={{ bgcolor: 'background.paper', color: 'primary.main', elevation: 3 }}>
       <Toolbar>
+        {/* 🛑 CHANGE 2: Branding - Icon next to Title */}
         <Box sx={{ flexGrow: 1, display: 'flex', alignItems: 'center', gap: 1.5 }}>
-          <BrainIcon sx={{ fontSize: 32, color: 'primary.main' }} />
-          <Typography variant="h6" component="h1" fontWeight="bold" color="text.primary">
+          
+          {/* Use <img> tag to display your custom icon */}
+          <img 
+            src="/stp-icon.ico" // Path to your icon in the public folder
+            alt="Smart Task Planner Logo" 
+            style={{ width: 32, height: 32, borderRadius: '50%' }} 
+          />
+          
+          <Typography variant="h6" component="h1" fontWeight="bold" color="primary.main">
             Smart Task Planner
           </Typography>
         </Box>
 
-        <Box sx={{ display: 'flex', gap: 3 }}>
+        {/* 🛑 CHANGE 3: Themed Buttons (Gold/Primary) */}
+        <Box sx={{ display: 'flex', gap: 2 }}>
           <Button
             component={Link}
             to="/"
-            color={pathname === "/" ? "primary" : "inherit"}
+            variant="contained" // Makes the button solid
+            color="primary" // Uses your custom Gold color
             sx={{
-              fontWeight: 500,
               textTransform: 'none',
-              '&:hover': { bgcolor: 'transparent' }
+              // Use secondary color (Salmon) for contrast/hover based on active status
+              backgroundColor: pathname === "/" ? 'secondary.main' : 'primary.main',
+              '&:hover': { 
+                backgroundColor: 'secondary.light', // Lighten salmon on hover
+              },
             }}
           >
             Home
@@ -33,11 +50,14 @@ export default function Header() {
           <Button
             component={Link}
             to="/history"
-            color={pathname === "/history" ? "primary" : "inherit"}
+            variant="contained"
+            color="primary"
             sx={{
-              fontWeight: 500,
               textTransform: 'none',
-              '&:hover': { bgcolor: 'transparent' }
+              backgroundColor: pathname === "/history" ? 'secondary.main' : 'primary.main',
+              '&:hover': { 
+                backgroundColor: 'secondary.light',
+              },
             }}
           >
             History
