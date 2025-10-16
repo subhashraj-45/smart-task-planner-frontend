@@ -1,4 +1,4 @@
-// src/components/ChatInput.jsx (FINAL VISIBILITY FIX W/ DARK BACKGROUND)
+// src/components/ChatInput.jsx (DARK FLOATING INPUT BAR)
 import React, { useState } from "react";
 import { Box, TextField, Button, CircularProgress } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
@@ -21,11 +21,11 @@ export default function ChatInput({ onGenerate, loading }) {
         display: "flex",
         alignItems: "flex-end",
         gap: 2,
-        // 🛑 RESTORE: Dark background and border for floating effect contrast
         borderTop: 1,
         borderColor: "text.primary", 
         p: 2,
-        bgcolor: "#2F4F4F", // Deep Teal (Dark Background)
+        // Restored Deep Teal (Dark) background
+        bgcolor: "#2F4F4F", 
       }}
     >
       <TextField
@@ -39,7 +39,7 @@ export default function ChatInput({ onGenerate, loading }) {
         sx={{
           "& .MuiOutlinedInput-root": {
             borderRadius: 3,
-            // FIX: Keep white background so text is visible on dark bar
+            // Text field background kept white for contrast
             bgcolor: 'white', 
             color: 'text.primary',
           },
@@ -49,7 +49,7 @@ export default function ChatInput({ onGenerate, loading }) {
         type="submit"
         disabled={loading}
         variant="contained"
-        color="primary" // Remains GOLD
+        color="primary" // GOLD color
         endIcon={!loading && <SendIcon />}
         sx={{
           height: 56,
