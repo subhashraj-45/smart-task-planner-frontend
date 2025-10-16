@@ -1,4 +1,4 @@
-// src/components/ChatInput.jsx (FINAL VISIBILITY FIX)
+// src/components/ChatInput.jsx (FINAL UX FIX)
 import React, { useState } from "react";
 import { Box, TextField, Button, CircularProgress } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
@@ -8,8 +8,8 @@ export default function ChatInput({ onGenerate, loading }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // This frontend validation remains to prevent sending empty requests
-    if (!goal.trim()) return; 
+    // This frontend validation remains to prevent sending empty requests
+    if (!goal.trim()) return; 
     onGenerate(goal);
     setGoal("");
   };
@@ -22,12 +22,10 @@ export default function ChatInput({ onGenerate, loading }) {
         display: "flex",
         alignItems: "flex-end",
         gap: 2,
-        // Use Deep Teal for border contrast (text.primary)
         borderTop: 1,
-        borderColor: "text.primary", 
+        borderColor: "grey.200",
         p: 2,
-        // Input container background: Deep Teal
-        bgcolor: "#2F4F4F", 
+        bgcolor: "background.paper",
       }}
     >
       <TextField
@@ -41,15 +39,12 @@ export default function ChatInput({ onGenerate, loading }) {
         sx={{
           "& .MuiOutlinedInput-root": {
             borderRadius: 3,
-            // 🛑 CRITICAL FIX: Force background to WHITE so Deep Teal text is visible
-            bgcolor: 'white', 
-            // Text color is already set to Deep Teal via theme.js MuiTextField style
           },
         }}
       />
       <Button
         type="submit"
-        disabled={loading}
+        disabled={loading} // 🛑 FIX: Removed || !goal.trim()
         variant="contained"
         color="primary"
         endIcon={!loading && <SendIcon />}
