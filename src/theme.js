@@ -1,68 +1,77 @@
 import { createTheme } from '@mui/material/styles';
 
 // 🛑 STEP 1: Define your custom colors based on the icon 
-const gold = '#C5A35C'; // Primary Gold/Brass
-const teal = '#2F4F4F'; // Deep Teal/Blue (Dark Primary/Background)
-const salmon = '#D4A4B1'; // Light Salmon/Pink (Accent/Secondary)
+const gold = '#C5A35C'; // RESERVED for Primary Buttons (GENERATE) and key text
+const teal = '#2F4F4F'; // Deep Teal/Blue (New default TEXT/BORDER color)
+const salmon = '#D4A4B1'; // Light Salmon/Pink (New default PAPER/CHATBOX background)
 
 const theme = createTheme({
   palette: {
-    // Set the primary color to the gold/brass tone
+    // Primary remains GOLD (for the GENERATE button)
     primary: {
-      main: gold, // Used for Buttons, focused Inputs
+      main: gold, 
       contrastText: '#fff', 
     },
-    // Set the secondary/accent color to the salmon/pink tone
+    // Secondary remains SALMON (can be used for accent hover/links)
     secondary: {
-      main: salmon, // Used for secondary elements, hover effects
+      main: salmon, 
       contrastText: teal,
     },
-    // Set a dark background color for the main paper/card elements
+    // Set background colors
     background: {
-      default: '#F5F5F5', // Light off-white for main page background
-      paper: teal, // Dark teal for Cards/Containers
+      default: '#F5F5F5', // Default light page background (for areas outside the gradient)
+      paper: salmon, // 🛑 CHANGE: Use SALMON for Cards/Chatbox Containers
     },
+    // Define the teal as a custom text color for high visibility
+    text: {
+        primary: teal, // 🛑 NEW: Use Deep Teal for all general text
+        secondary: teal,
+    }
   },
   
-  // 🛑 STEP 2: Style specific components to match the gold/dark theme
+  // 🛑 STEP 2: Style specific components to implement the Salmon/Teal look
   components: {
-    MuiPaper: { // Use MuiPaper for the central input card
+    MuiPaper: { // Use MuiPaper for the central chatbox card
       styleOverrides: {
         root: {
-          backgroundColor: teal, // Dark teal background
-          color: gold, // Gold text color
-          boxShadow: '0px 0px 15px rgba(197, 163, 92, 0.7)', // Gold glowing shadow
+          backgroundColor: salmon, // 🛑 CHANGE: Use SALMON background
+          color: teal, // 🛑 CHANGE: Use DEEP TEAL text color
+          boxShadow: '0px 0px 15px rgba(47, 79, 79, 0.4)', // Teal glowing shadow
           borderRadius: '12px',
         },
       },
     },
+    
+    // MuiButton is fine, as it keeps the GENERATE button GOLD (primary)
     MuiButton: {
       styleOverrides: {
         containedPrimary: {
           backgroundColor: gold,
           '&:hover': {
-            backgroundColor: '#A88D53', // Darker gold on hover
+            backgroundColor: '#A88D53', 
           },
         },
       },
     },
-    MuiTextField: { // Style the input field
-        styleOverrides: {
-            root: {
-                '& .MuiOutlinedInput-root': {
-                    color: gold, // Input text is gold
-                    '& fieldset': {
-                        borderColor: salmon, // Border color
-                    },
-                    '&:hover fieldset': {
-                        borderColor: gold, // Gold border on hover
-                    },
-                },
-                '& .MuiInputLabel-root': {
-                    color: salmon, // Label text is salmon
-                },
+    
+    // MuiTextField styles are modified for the new theme contrast
+    MuiTextField: {
+      styleOverrides: {
+        root: {
+          '& .MuiOutlinedInput-root': {
+            color: teal, // 🛑 CHANGE: Input text is DEEP TEAL
+            '& fieldset': {
+              borderColor: teal, // 🛑 CHANGE: Border color is DEEP TEAL
             },
+            '&:hover fieldset': {
+              borderColor: gold, // Keep Gold border on hover for emphasis
+            },
+          },
+          '& .MuiInputLabel-root': {
+            color: teal, // 🛑 CHANGE: Label text is DEEP TEAL
+          },
         },
+      },
     },
   },
 });
