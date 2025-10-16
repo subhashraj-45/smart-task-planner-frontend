@@ -1,48 +1,70 @@
-// src/components/TaskCard.jsx (MUI Version)
-import React from "react";
-import { Card, CardContent, Typography, Box, Chip, Stack } from "@mui/material";
-import AccessTimeIcon from "@mui/icons-material/AccessTime";
-import LinkIcon from "@mui/icons-material/Link";
+// src/components/TaskCard.jsx (Final Styling with Data Fixes)
+import React from 'react';
+import { Paper, Box, Typography } from '@mui/material';
+import AccessTimeIcon from '@mui/icons-material/AccessTime';
+import LinkIcon from '@mui/icons-material/Link';
 
 export default function TaskCard({ task, index }) {
-  return (
-    <Card variant="outlined" sx={{ borderRadius: 2, bgcolor: "grey.50" }}>
-      <CardContent sx={{ p: 2, "&:last-child": { pb: 2 } }}>
-        <Typography variant="subtitle1" fontWeight="600" color="text.primary" mb={1}>
-          {index + 1}. {task.task}
-        </Typography>
+  // 🛑 CRITICAL FIX: Robust data mapping for the task title and dependencies
+  // Checks for 'title' (if API changed) or falls back to your old key 'task'
+  const taskTitle = task.title || task.task; 
+  // Checks for 'dependsOn' (if API changed) or falls back to your old key 'depends_on'
+  const taskDependencies = task.dependsOn || task.depends_on; 
 
-        <Box display="flex" alignItems="center" color="text.secondary" mb={task.depends_on?.length > 0 ? 1 : 0}>
-          <AccessTimeIcon sx={{ fontSize: 16, mr: 0.5 }} />
-          <Typography variant="body2" component="span" fontWeight="500">
-            Deadline:
-          </Typography>
-          <Typography variant="body2" ml={0.5}>
-            {task.deadline}
-          </Typography>
-        </Box>
+  const accentColor = 'primary.light'; // Subtle gold accent
 
-        {task.depends_on?.length > 0 && (
-          <Box mt={1}>
-            <Stack direction="row" spacing={1} alignItems="center">
-              <LinkIcon sx={{ fontSize: 16, color: "grey.500" }} />
-              <Typography variant="body2" component="span" fontWeight="500" color="text.secondary">
-                Depends on:
-              </Typography>
-              {task.depends_on.map((dep, i) => (
-                <Chip
-                  key={i}
-                  label={dep}
-                  size="small"
-                  color="info"
-                  variant="outlined"
-                  sx={{ borderRadius: 1.5 }}
-                />
-              ))}
-            </Stack>
-          </Box>
-        )}
-      </CardContent>
-    </Card>
-  );
+  return (
+    <Paper // Switched back to Paper for the desired white/bordered look
+      elevation={2}
+      sx={{
+        p: 2,
+        borderRadius: 2,
+        // Card background is Clean White
+        bgcolor: '#FFFFFF', 
+        border: 1, 
+        borderColor: accentColor, // Subtle gold border
+        mb: 2, 
+        width: '100%', 
+        boxShadow: `0px 2px 5px 0px rgba(184, 134, 11, 0.1)`, 
+      }}
+    >
+      <Typography variant="subtitle1" fontWeight="bold" sx={{ color: 'text.primary', mb: 1 }}>
+        {index + 1}. {**taskTitle**} // Uses the robust variable to show full title
+      </Typography>
+
+      {task.deadline && (
+        <Box display="flex" alignItems="center" sx={{ color: 'grey.600', fontSize: '0.85rem', mb: 0.5 }}>
+          <AccessTimeIcon sx={{ fontSize: '1rem', mr: 0.5, color: 'text.secondary' }} />
+          Deadline: {task.deadline}
+        </Box>
+      )}
+
+      {taskDependencies && taskDependencies.length > 0 && (
+        <Box sx={{ mt: 1 }}>
+          <Typography variant="caption" display="block" sx={{ color: 'text.secondary', mb: 0.5 }}>
+            <LinkIcon sx={{ fontSize: '0.85rem', mr: 0.5 }} />
+            Depends on:
+          </Typography>
+          <Box display="flex" flexWrap="wrap" gap={0.5}>
+            {taskDependencies.map((dep, depIndex) => (
+              <Box
+                key={depIndex}
+                sx={{
+                  bgcolor: 'lightsalmon', 
+                  color: 'white', 
+                  borderRadius: 1,
+                  px: 1,
+                  py: 0.25,
+                  fontSize: '0.75rem',
+                  fontWeight: 'medium',
+                }}
+              >
+                {dep}
+              </Box>
+            ))}
+          </Box>
+        </Box>
+      )}
+    </Paper>
+  );
 }
