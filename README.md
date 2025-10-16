@@ -1,20 +1,52 @@
-<<<<<<< HEAD
-# React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# 🧠 Smart Task Planner - Client Application
+This repository contains the single-page application (SPA) built with React/Vite. It serves as the user interface for submitting goals and displaying the AI-generated plans.
 
-Currently, two official plugins are available:
+🔗 Project Status & Cross-Reference
+Component	Status	URL
+Client App	LIVE (Vercel)	https://smart-task-planner-frontend.vercel.app/
+Backend API	LIVE (Render)	[INSERT YOUR RENDER API URL HERE]
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Export to Sheets
+🚀 Scope and Deliverables
+The frontend's role is to provide the input mechanism for the goal text and render the structured output (task breakdown, dependencies, estimated timelines).
 
-## React Compiler
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Input: Text field for the user's goal.
 
-## Expanding the ESLint configuration
+Output: Structured UI display of the JSON response from the API.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
-=======
-# smart-task-planner-frontend
->>>>>>> bc109389b5d1685702b9dc5f6352589d1a86ed60
+🛠️ Technical Stack
+Framework: React (Vite)
+
+State Management: (Mention if you used Redux, Zustand, or simple React Hooks)
+
+Styling: (Mention if you used Tailwind CSS, Styled Components, etc.)
+
+Deployment: Vercel
+
+⚙️ API Consumption
+The application fetches and posts data to the external Render API via the following environment variable:
+
+Variable	Value	Usage
+VITE_API_BASE	[Your Render API URL]	Used by the client to construct API calls (e.g., ${VITE_API_BASE}/generate-plan).
+
+Export to Sheets
+🖥️ Local Setup (Frontend)
+Clone the repository.
+
+Install dependencies: npm install
+
+Create a local environment file: Create a file named .env in the root of the repository.
+
+Populate .env:
+
+Bash
+
+# Frontend/.env
+# Points the local client to your live Render Backend API
+VITE_API_BASE=https://smart-task-planner-api.onrender.com 
+Run the application: npm run dev (Runs on http://localhost:5173 or similar port)
+
+# Link for Backend Repository
+https://github.com/subhashraj-45/smart-task-planner-backend
