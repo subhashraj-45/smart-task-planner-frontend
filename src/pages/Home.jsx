@@ -29,7 +29,7 @@ export default function Home() {
           maxHeight: 'calc(100vh - 120px)',
           
           // Outer Paper (Chat Window Frame) remains DARK TEAL/GREEN
-          bgcolor: '#2F4F4F', 
+          bgcolor: '#FFFFFF', 
           color: 'text.primary', 
         }}
       >
