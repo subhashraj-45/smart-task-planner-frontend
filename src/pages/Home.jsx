@@ -1,4 +1,4 @@
-// src/pages/Home.jsx (FINAL STYLING WITH SALMON BACKGROUND)
+// src/pages/Home.jsx (FINAL STYLING WITH SALMON BACKGROUND FIX)
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Box, Paper, Typography, Container } from "@mui/material";
@@ -21,16 +21,16 @@ export default function Home() {
         sx={{
           borderRadius: 4,
           overflow: "hidden",
-          // 🛑 1. BORDER COLOR: Use Deep Teal for contrast (from theme.js text.primary)
+          // 1. BORDER COLOR: Use Deep Teal
           border: 1,
-          borderColor: "text.primary", 
+          borderColor: "text.primary", 
           display: "flex",
           flexDirection: "column",
           maxHeight: 'calc(100vh - 120px)',
-          // 🛑 2. BACKGROUND COLOR: Set to Light Salmon (from theme.js background.paper)
-          bgcolor: 'background.paper', 
-          // Set default text color inside Paper to Deep Teal
-          color: 'text.primary', 
+          // 🛑 FIX: Use Light Salmon hex code directly
+          bgcolor: '#D4A4B1', 
+          // Set default text color to Deep Teal
+          color: 'text.primary', 
         }}
       >
         <Box
@@ -39,19 +39,19 @@ export default function Home() {
             flexGrow: 1,
             overflowY: "auto",
             height: '100%',
-            // 🛑 3. CHAT AREA BACKGROUND: Set to Light Salmon
-            bgcolor: 'background.paper', 
+            // 🛑 FIX: Use Light Salmon hex code directly
+            bgcolor: '#D4A4B1', 
           }}
         >
           {chat.length === 0 && (
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-              <Typography 
-                // 🛑 4. GREETING TEXT COLOR: Set to Deep Teal
-                color="text.primary" 
-                textAlign="center" 
+              <Typography 
+                // GREETING TEXT COLOR: Set to Deep Teal
+                color="text.primary" 
+                textAlign="center" 
                 mt={5}
               >
-                👋 Hi there! Describe your goal to get an AI-generated task plan.
+                Describe your Task.
               </Typography>
             </motion.div>
           )}
