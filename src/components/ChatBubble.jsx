@@ -1,4 +1,4 @@
-// src/components/ChatBubble.jsx (FINAL WHITE/GOLD BUBBLE STYLING)
+// src/components/ChatBubble.jsx (GOLD/WHITE BUBBLE STYLING)
 import React from "react";
 import { motion } from "framer-motion";
 import { Paper, Box, Typography, Button } from "@mui/material"; 
@@ -9,9 +9,7 @@ import { formatPlanForCopy } from "../utils/planUtils";
 export default function ChatBubble({ sender, text, goal, tasks, children }) {
   const isUser = sender === "user";
 
-  const handleCopy = () => {
-    // ... (copy logic remains the same)
-  };
+  const handleCopy = () => { /* ... */ };
 
   return (
     <motion.div
@@ -27,13 +25,13 @@ export default function ChatBubble({ sender, text, goal, tasks, children }) {
           borderRadius: 3,
           ...(isUser
             ? {
-                // 🛑 USER: Gold background, white text, aligns right
+                // USER: Gold background, white text, aligns right
                 bgcolor: "primary.main",
                 color: "white",
                 borderBottomRightRadius: 0,
               }
             : {
-                // 🛑 AI: White background, dark text, aligns left
+                // AI: White background, dark text, aligns left
                 bgcolor: "white", 
                 color: "text.primary", 
                 border: 1,
