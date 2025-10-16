@@ -1,4 +1,4 @@
-// src/pages/Home.jsx (Refined to match the latest image)
+// src/pages/Home.jsx (Basic UI)
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Box, Paper, Typography, Container } from "@mui/material";
@@ -28,8 +28,8 @@ export default function Home() {
           flexDirection: "column",
           maxHeight: 'calc(100vh - 120px)',
           
-          // Outer Paper (Chat Window Frame) remains DARK TEAL/GREEN
-          bgcolor: '#2F4F4F', 
+          // Using default paper color for the outer frame
+          bgcolor: 'background.paper', 
           color: 'text.primary', 
         }}
       >
@@ -40,8 +40,8 @@ export default function Home() {
             overflowY: "auto",
             height: '100%',
             
-            // 🛑 CHANGE 1: Inner Chat History Area now LIGHT GREY/OFF-WHITE
-            bgcolor: '#F5F5F5', // Light grey for the chat history background
+            // Using a light color for the chat history area
+            bgcolor: 'grey.50', 
             paddingBottom: 3, 
           }}
         >
@@ -54,10 +54,9 @@ export default function Home() {
                   borderRadius: 3,
                   maxWidth: "70%",
                   mx: 'auto', 
-                  // 🛑 CHANGE 2: Greeting bubble also LIGHT GREY/OFF-WHITE to match container
-                  bgcolor: '#F5F5F5', // Light grey for the greeting bubble
+                  bgcolor: 'white', 
                   border: 1,
-                  borderColor: 'grey.300' // Slightly darker border for contrast
+                  borderColor: 'grey.300'
                 }}
               >
                 <Typography 
@@ -69,11 +68,22 @@ export default function Home() {
               </Paper>
             </motion.div>
           )}
-          {/* Chat bubbles will appear here */}
+          {chat.map((msg, i) => (
+            <Box key={i}>
+              <ChatBubble 
+                  sender={msg.sender} 
+                  text={msg.text}
+                  tasks={msg.tasks}
+                  goal={msg.goal}
+              >
+                {msg.tasks && <TaskList tasks={msg.tasks} />}
+              </ChatBubble>
+            </Box>
+          ))}
         </Box>
 
-        {/* 🛑 CHANGE 3: Input bar wrapper area is now DARK TEAL/GREEN */}
-        <Box sx={{ p: 2, bgcolor: '#2F4F4F', borderTop: 1, borderColor: 'grey.300' }}>
+        {/* Input bar wrapper area uses default white/light grey */}
+        <Box sx={{ p: 2, bgcolor: 'background.paper', borderTop: 1, borderColor: 'grey.300' }}>
           <ChatInput onGenerate={handleGenerate} loading={loading} />
         </Box>
       </Paper>
